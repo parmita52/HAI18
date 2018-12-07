@@ -1,0 +1,23 @@
+#myCanvas {
+	border: 0px solid #000000;
+}
+
+body {
+	background: white;
+}
+
+button {
+	border-radius: 12px;
+	background-color: black;
+	color: white;
+	border: none;
+	padding: 4px 64px;
+	font-size: 32px;
+	margin-bottom: 8px;
+
+}
+
+.wrapper{
+	display: flex;
+  	justify-content: center;
+}
