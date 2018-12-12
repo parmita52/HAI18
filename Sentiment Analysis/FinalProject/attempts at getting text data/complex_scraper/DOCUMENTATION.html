@@ -1,0 +1,123 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module scrapeRateProfs</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>scrapeRateProfs</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="http://www.cs.cornell.edu/~karthik/projects/rateprof-scrape/index.html">Project Homepage</a><br><a href="http://www.cs.cornell.edu/~karthik/">Developer's Homepage</a></font></td></tr></table>
+    <p><tt>Python&nbsp;Module&nbsp;for&nbsp;scraping&nbsp;reviews&nbsp;from&nbsp;RateMyProfessor.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;scrapes&nbsp;reviews&nbsp;about&nbsp;professors&nbsp;from&nbsp;a&nbsp;certain&nbsp;university&nbsp;from&nbsp;ratemyprofessor.com.<br>
+&nbsp;<br>
+Does&nbsp;this&nbsp;in&nbsp;the&nbsp;following&nbsp;steps:<br>
+Step&nbsp;1:&nbsp;Get&nbsp;the&nbsp;list&nbsp;of&nbsp;professors&nbsp;starting&nbsp;with&nbsp;each&nbsp;letter<br>
+Step&nbsp;2:&nbsp;Get&nbsp;the&nbsp;list&nbsp;of&nbsp;all&nbsp;reviews&nbsp;for&nbsp;that&nbsp;professor.<br>
+Step&nbsp;3:&nbsp;Get&nbsp;each&nbsp;review&nbsp;from&nbsp;that&nbsp;list.<br>
+&nbsp;<br>
+It&nbsp;also&nbsp;has&nbsp;the&nbsp;ability&nbsp;to&nbsp;be&nbsp;interrupted&nbsp;and&nbsp;(effectively)&nbsp;resume&nbsp;from&nbsp;where&nbsp;it&nbsp;stopped&nbsp;without&nbsp;having&nbsp;to&nbsp;redownload&nbsp;all&nbsp;the&nbsp;previous&nbsp;files.&nbsp;It&nbsp;does&nbsp;this&nbsp;by&nbsp;performs&nbsp;optimizations&nbsp;such&nbsp;as&nbsp;storing&nbsp;the&nbsp;webpages&nbsp;it&nbsp;has&nbsp;downloaded&nbsp;and&nbsp;compacting&nbsp;the&nbsp;downloaded&nbsp;pages&nbsp;into&nbsp;a&nbsp;format&nbsp;that&nbsp;is&nbsp;easy&nbsp;to&nbsp;process.<br>
+&nbsp;<br>
+Usage:<br>
+&nbsp;&nbsp;scrapeRateProfs.py&nbsp;[-h]&nbsp;-sid&nbsp;SchoolID&nbsp;[-delay&nbsp;DELAY]&nbsp;-o&nbsp;OUTPUT&nbsp;-path&nbsp;PATH<br>
+&nbsp;<br>
+Inputs:<br>
+&nbsp;&nbsp;-h,&nbsp;--help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show&nbsp;this&nbsp;help&nbsp;message&nbsp;and&nbsp;exit<br>
+&nbsp;&nbsp;-sid&nbsp;SchoolID&nbsp;&nbsp;&nbsp;ID&nbsp;of&nbsp;the&nbsp;school&nbsp;on&nbsp;RateMyProf<br>
+&nbsp;&nbsp;-delay&nbsp;DELAY&nbsp;&nbsp;&nbsp;&nbsp;Amount&nbsp;of&nbsp;time&nbsp;to&nbsp;pause&nbsp;after&nbsp;downloading&nbsp;a&nbsp;website<br>
+&nbsp;&nbsp;-o&nbsp;OUTPUT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Path&nbsp;to&nbsp;output&nbsp;file&nbsp;for&nbsp;reviews<br>
+&nbsp;&nbsp;-path&nbsp;PATH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;where&nbsp;the&nbsp;webpages&nbsp;should&nbsp;be&nbsp;downloaded<br>
+&nbsp;<br>
+Key&nbsp;Outputs:<br>
+&nbsp;&nbsp;-&nbsp;TSV&nbsp;File&nbsp;containing&nbsp;the&nbsp;review&nbsp;information.<br>
+&nbsp;&nbsp;-&nbsp;TSV&nbsp;File&nbsp;containing&nbsp;the&nbsp;aggregate&nbsp;information&nbsp;for&nbsp;a&nbsp;professor.<br>
+&nbsp;&nbsp;-&nbsp;Condensed&nbsp;set&nbsp;of&nbsp;information&nbsp;downloaded<br>
+&nbsp;&nbsp;<br>
+Formats&nbsp;are&nbsp;provided&nbsp;in&nbsp;the&nbsp;accompanying&nbsp;README</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="http://docs.python.org/library/argparse.html">argparse</a><br>
+<a href="http://docs.python.org/library/bisect.html">bisect</a><br>
+</td><td width="25%" valign=top><a href="http://docs.python.org/library/os.html">os</a><br>
+<a href="http://docs.python.org/library/sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="http://docs.python.org/library/time.html">time</a><br>
+<a href="http://docs.python.org/library/urllib2.html">urllib2</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-downloadToFile"><strong>downloadToFile</strong></a>(url, fileName, force<font color="#909090">=False</font>)</dt><dd><tt>Downloads&nbsp;url&nbsp;to&nbsp;file<br>
+&nbsp;<br>
+Inputs:<br>
+-&nbsp;url&nbsp;:&nbsp;Url&nbsp;to&nbsp;be&nbsp;downloaded<br>
+-&nbsp;fileName&nbsp;:&nbsp;Name&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;write&nbsp;to<br>
+-&nbsp;force&nbsp;:&nbsp;Optional&nbsp;boolean&nbsp;argument&nbsp;which&nbsp;if&nbsp;true&nbsp;will&nbsp;overwrite&nbsp;the&nbsp;file&nbsp;even&nbsp;it&nbsp;it&nbsp;exists<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Pair&nbsp;indicating&nbsp;if&nbsp;the&nbsp;file&nbsp;was&nbsp;downloaded&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;split&nbsp;up&nbsp;line-by-line</tt></dd></dl>
+ <dl><dt><a name="-getAllReviews"><strong>getAllReviews</strong></a>(sid, outF)</dt><dd><tt>The&nbsp;main&nbsp;function&nbsp;to&nbsp;get&nbsp;all&nbsp;the&nbsp;reviews&nbsp;from&nbsp;a&nbsp;school.</tt></dd></dl>
+ <dl><dt><a name="-getFileContentFromWeb"><strong>getFileContentFromWeb</strong></a>(url)</dt><dd><tt>Downloads&nbsp;data&nbsp;from&nbsp;a&nbsp;website<br>
+&nbsp;<br>
+Inputs:<br>
+-&nbsp;url&nbsp;:&nbsp;Url&nbsp;to&nbsp;be&nbsp;downloaded<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Content&nbsp;of&nbsp;url</tt></dd></dl>
+ <dl><dt><a name="-getLinksFromList"><strong>getLinksFromList</strong></a>(plContents)</dt><dd><tt>Extracts&nbsp;the&nbsp;links&nbsp;for&nbsp;the&nbsp;individual&nbsp;review&nbsp;pages&nbsp;of&nbsp;each&nbsp;professor<br>
+&nbsp;<br>
+Inputs:<br>
+-&nbsp;plContents&nbsp;:&nbsp;Pruned&nbsp;contents&nbsp;of&nbsp;the&nbsp;professor&nbsp;list&nbsp;file.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Triplet&nbsp;containing&nbsp;3&nbsp;arrays,&nbsp;one&nbsp;for&nbsp;the&nbsp;professor&nbsp;names,&nbsp;the&nbsp;link&nbsp;to&nbsp;their&nbsp;review&nbsp;page&nbsp;and&nbsp;a&nbsp;boolean&nbsp;flag&nbsp;indicating&nbsp;if&nbsp;they&nbsp;have&nbsp;any&nbsp;reviews</tt></dd></dl>
+ <dl><dt><a name="-getReviewsForProf"><strong>getReviewsForProf</strong></a>(rurl, rname)</dt><dd><tt>Gets&nbsp;the&nbsp;reviews&nbsp;and&nbsp;aggregate&nbsp;statistics&nbsp;for&nbsp;a&nbsp;specific&nbsp;professor.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Inputs:<br>
+-&nbsp;rurl&nbsp;:&nbsp;Link&nbsp;to&nbsp;the&nbsp;review&nbsp;page&nbsp;for&nbsp;a&nbsp;professor<br>
+-&nbsp;rname:&nbsp;Name&nbsp;of&nbsp;the&nbsp;professor&nbsp;(this&nbsp;will&nbsp;be&nbsp;unique)</tt></dd></dl>
+ <dl><dt><a name="-pruneProfListFile"><strong>pruneProfListFile</strong></a>(plContents, fileName)</dt><dd><tt>Prunes&nbsp;the&nbsp;professor&nbsp;list&nbsp;file&nbsp;contents&nbsp;from&nbsp;the&nbsp;entire&nbsp;website&nbsp;to&nbsp;only&nbsp;what&nbsp;is&nbsp;required<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Inputs:<br>
+-&nbsp;plContents&nbsp;:&nbsp;Contents&nbsp;of&nbsp;the&nbsp;Professor&nbsp;List&nbsp;webpage<br>
+-&nbsp;filename&nbsp;&nbsp;&nbsp;:&nbsp;Name&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;write&nbsp;the&nbsp;output&nbsp;to<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Pruned&nbsp;content&nbsp;from&nbsp;the&nbsp;list&nbsp;page&nbsp;containing&nbsp;only&nbsp;information&nbsp;about&nbsp;the&nbsp;links&nbsp;to&nbsp;each&nbsp;individual&nbsp;professor's&nbsp;review&nbsp;page</tt></dd></dl>
+ <dl><dt><a name="-pruneProfReviewFile"><strong>pruneProfReviewFile</strong></a>(prContents, fileName)</dt><dd><tt>Prunes&nbsp;the&nbsp;review&nbsp;page&nbsp;for&nbsp;a&nbsp;particular&nbsp;professor&nbsp;to&nbsp;only&nbsp;what&nbsp;is&nbsp;required&nbsp;namely&nbsp;the&nbsp;stats&nbsp;and&nbsp;the&nbsp;reviews<br>
+&nbsp;<br>
+Inputs:<br>
+-&nbsp;prContents&nbsp;:&nbsp;Contents&nbsp;of&nbsp;the&nbsp;review&nbsp;webpage&nbsp;for&nbsp;a&nbsp;particular&nbsp;professor<br>
+-&nbsp;filename&nbsp;&nbsp;&nbsp;:&nbsp;Name&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;write&nbsp;the&nbsp;output&nbsp;to<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Pruned&nbsp;contents&nbsp;of&nbsp;the&nbsp;review&nbsp;page,&nbsp;which&nbsp;includes&nbsp;aggregate&nbsp;details&nbsp;of&nbsp;all&nbsp;reviews,&nbsp;as&nbsp;well&nbsp;as&nbsp;all&nbsp;individual&nbsp;reviews.</tt></dd></dl>
+</td></tr></table><p>
+<!--
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>baseUrl</strong> = 'http://www.ratemyprofessors.com/'<br>
+<strong>delayTime</strong> = 1<br>
+<strong>outAggFile</strong> = None<br>
+<strong>outRevFile</strong> = None<br>
+<strong>path</strong> = '/home/karthik/Desktop/Scraping/Hotels/WebPages'<br>
+<strong>totProfs</strong> = 0<br>
+<strong>totProfsEmpty</strong> = 0<br>
+<strong>totReviews</strong> = 0<br>
+<strong>totReviews2</strong> = 0</td></tr></table>
+-->
+</body></html>
